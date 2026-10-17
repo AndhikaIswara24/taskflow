@@ -1,46 +1,102 @@
 <x-guest-layout>
-    <!-- Session Status -->
-    <x-auth-session-status class="mb-4" :status="session('status')" />
+    <!-- Logo dan Judul TaskFlow -->
+    <div class="mb-6 flex flex-col items-center">
+        <a href="{{ route('login') }}">
+            <img
+                src="{{ asset('images/taskflow_logo.png') }}"
+                alt="Logo TaskFlow"
+                class="h-20 w-auto object-contain"
+            >
+        </a>
 
+        <h1 class="mt-3 text-2xl font-bold text-gray-800">
+            Selamat Datang di TaskFlow
+        </h1>
+
+        <p class="mt-1 text-sm text-gray-600 text-center">
+            Masuk untuk mengelola dan memantau tugas harianmu.
+        </p>
+    </div>
+
+    <!-- Status Login -->
+    <x-auth-session-status
+        class="mb-4"
+        :status="session('status')"
+    />
+
+    <!-- Form Login -->
     <form method="POST" action="{{ route('login') }}">
         @csrf
 
-        <!-- Email Address -->
+        <!-- Email -->
         <div>
-            <x-input-label for="email" :value="__('Email')" />
-            <x-text-input id="email" class="block mt-1 w-full" type="email" name="email" :value="old('email')" required autofocus autocomplete="username" />
-            <x-input-error :messages="$errors->get('email')" class="mt-2" />
+            <x-input-label for="email" value="Alamat Email" />
+
+            <x-text-input
+                id="email"
+                class="block mt-1 w-full"
+                type="email"
+                name="email"
+                :value="old('email')"
+                required
+                autofocus
+                autocomplete="username"
+            />
+
+            <x-input-error
+                :messages="$errors->get('email')"
+                class="mt-2"
+            />
         </div>
 
-        <!-- Password -->
+        <!-- Kata Sandi -->
         <div class="mt-4">
-            <x-input-label for="password" :value="__('Password')" />
+            <x-input-label for="password" value="Kata Sandi" />
 
-            <x-text-input id="password" class="block mt-1 w-full"
-                            type="password"
-                            name="password"
-                            required autocomplete="current-password" />
+            <x-text-input
+                id="password"
+                class="block mt-1 w-full"
+                type="password"
+                name="password"
+                required
+                autocomplete="current-password"
+            />
 
-            <x-input-error :messages="$errors->get('password')" class="mt-2" />
+            <x-input-error
+                :messages="$errors->get('password')"
+                class="mt-2"
+            />
         </div>
 
-        <!-- Remember Me -->
+        <!-- Ingat Saya -->
         <div class="block mt-4">
             <label for="remember_me" class="inline-flex items-center">
-                <input id="remember_me" type="checkbox" class="rounded border-gray-300 text-indigo-600 shadow-sm focus:ring-indigo-500" name="remember">
-                <span class="ms-2 text-sm text-gray-600">{{ __('Remember me') }}</span>
+                <input
+                    id="remember_me"
+                    type="checkbox"
+                    class="rounded border-gray-300 text-indigo-600 shadow-sm focus:ring-indigo-500"
+                    name="remember"
+                >
+
+                <span class="ms-2 text-sm text-gray-600">
+                    Ingat saya
+                </span>
             </label>
         </div>
 
-        <div class="flex items-center justify-end mt-4">
+        <!-- Tombol Login -->
+        <div class="mt-6 flex items-center justify-end">
             @if (Route::has('password.request'))
-                <a class="underline text-sm text-gray-600 hover:text-gray-900 rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500" href="{{ route('password.request') }}">
-                    {{ __('Forgot your password?') }}
+                <a
+                    class="text-sm text-gray-600 underline hover:text-gray-900 rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
+                    href="{{ route('password.request') }}"
+                >
+                    Lupa kata sandi?
                 </a>
             @endif
 
             <x-primary-button class="ms-3">
-                {{ __('Log in') }}
+                Masuk
             </x-primary-button>
         </div>
     </form>

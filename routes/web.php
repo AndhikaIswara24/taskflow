@@ -6,7 +6,7 @@ use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\TaskController; // baru
 
 Route::get('/', function () {
-    return view('welcome');
+    return redirect('login');
 });
 
 
