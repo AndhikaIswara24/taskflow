@@ -1,6 +1,7 @@
+
 <x-guest-layout>
     <!-- Logo dan Judul TaskFlow -->
-    <div class="mb-6 flex flex-col items-center">
+    <div class="mb-8 flex flex-col items-center text-center">
         <a href="{{ route('login') }}">
             <img
                 src="{{ asset('images/taskflow_logo.png') }}"
@@ -9,11 +10,11 @@
             >
         </a>
 
-        <h1 class="mt-3 text-2xl font-bold text-gray-800">
-            Selamat Datang di TaskFlow
+        <h1 class="mt-4 text-2xl font-bold text-slate-900">
+            Masuk ke TaskFlow
         </h1>
 
-        <p class="mt-1 text-sm text-gray-600 text-center">
+        <p class="mt-2 text-sm leading-6 text-slate-600">
             Masuk untuk mengelola dan memantau tugas harianmu.
         </p>
     </div>
@@ -30,17 +31,22 @@
 
         <!-- Email -->
         <div>
-            <x-input-label for="email" value="Alamat Email" />
+            <x-input-label
+                for="email"
+                value="Alamat Email"
+                class="font-medium text-slate-700"
+            />
 
             <x-text-input
                 id="email"
-                class="block mt-1 w-full"
+                class="mt-2 block w-full rounded-xl border-slate-300 px-4 py-3 shadow-sm focus:border-indigo-500 focus:ring-indigo-500"
                 type="email"
                 name="email"
                 :value="old('email')"
                 required
                 autofocus
                 autocomplete="username"
+                placeholder="nama@email.com"
             />
 
             <x-input-error
@@ -50,16 +56,21 @@
         </div>
 
         <!-- Kata Sandi -->
-        <div class="mt-4">
-            <x-input-label for="password" value="Kata Sandi" />
+        <div class="mt-5">
+            <x-input-label
+                for="password"
+                value="Kata Sandi"
+                class="font-medium text-slate-700"
+            />
 
             <x-text-input
                 id="password"
-                class="block mt-1 w-full"
+                class="mt-2 block w-full rounded-xl border-slate-300 px-4 py-3 shadow-sm focus:border-indigo-500 focus:ring-indigo-500"
                 type="password"
                 name="password"
                 required
                 autocomplete="current-password"
+                placeholder="Masukkan kata sandi"
             />
 
             <x-input-error
@@ -68,36 +79,51 @@
             />
         </div>
 
-        <!-- Ingat Saya -->
-        <div class="block mt-4">
+        <!-- Ingat Saya dan Lupa Kata Sandi -->
+        <div class="mt-5 flex flex-wrap items-center justify-between gap-3">
             <label for="remember_me" class="inline-flex items-center">
                 <input
                     id="remember_me"
                     type="checkbox"
-                    class="rounded border-gray-300 text-indigo-600 shadow-sm focus:ring-indigo-500"
+                    class="rounded border-slate-300 text-indigo-600 shadow-sm focus:ring-indigo-500"
                     name="remember"
                 >
 
-                <span class="ms-2 text-sm text-gray-600">
+                <span class="ms-2 text-sm text-slate-600">
                     Ingat saya
                 </span>
             </label>
-        </div>
 
-        <!-- Tombol Login -->
-        <div class="mt-6 flex items-center justify-end">
             @if (Route::has('password.request'))
                 <a
-                    class="text-sm text-gray-600 underline hover:text-gray-900 rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
+                    class="text-sm font-medium text-indigo-600 hover:text-indigo-800 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 rounded-md"
                     href="{{ route('password.request') }}"
                 >
                     Lupa kata sandi?
                 </a>
             @endif
+        </div>
 
-            <x-primary-button class="ms-3">
+        <!-- Tombol Login -->
+        <div class="mt-6">
+            <x-primary-button class="flex w-full justify-center rounded-xl bg-indigo-600 px-4 py-3 text-base font-semibold hover:bg-indigo-700 focus:bg-indigo-700 active:bg-indigo-800">
                 Masuk
             </x-primary-button>
         </div>
     </form>
+
+    <!-- Tautan Registrasi -->
+    <div class="mt-6 border-t border-slate-100 pt-5 text-center">
+        <p class="text-sm text-slate-600">
+            Belum punya akun?
+            @if (Route::has('register'))
+                <a
+                    href="{{ route('register') }}"
+                    class="font-semibold text-indigo-600 hover:text-indigo-800"
+                >
+                    Daftar sekarang
+                </a>
+            @endif
+        </p>
+    </div>
 </x-guest-layout>
